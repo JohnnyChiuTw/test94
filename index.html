@@ -1,103 +1,25 @@
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-	 
-    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image.prod.js"></script>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image-aframe.prod.js"></script>
-	  
-	  <script>
-	  AFRAME.registerComponent('playbutton', {
-		init: function () {	    
-			var button = document.querySelector("#mutebutton");
-			var vid_0 = document.querySelector("#vid");
-			button.addEventListener("click", function(evt){
-				console.log("button clicked")
-				if(vid_0.muted==true){
-					button.innerHTML="暫停";
-					vid_0.play();
-					vid_0.muted=false;
-					console.log("按了Ａ");
-				}else{
-					button.innerHTML="播放";
-					vid_0.pause();
-					vid_0.muted=true;
-					console.log("按了Ｂ");
-				}
-			});
-						
-		}
-	});
-	
-	document.addEventListener("DOMContentLoaded", function() {
-		const exampleTarget = document.querySelector('#example-target');
-		var button = document.querySelector("#mutebutton");
-		var vid_0 = document.querySelector("#vid");
-		// detect target found
-    		exampleTarget.addEventListener("targetFound", event => {
-      		console.log("target found");
-	    		if(vid_0.muted==true){
-				button.innerHTML="暫停";
-	    			vid_0.muted=false;		    
-				vid_0.play();
-	   	 	} 
-    		});
-
-    		// detect target lost
-    		exampleTarget.addEventListener("targetLost", event => {
-      		console.log("target lost");
-	   		if(vid_0.muted==false){
-				button.innerHTML="播放";
-	    			vid_0.muted=true;		    
-				vid_0.pause();
-	    		} 
-    		});
-		
-	});
-		  	  
-	  
-  </script>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | HoimeGameNew</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/homeOfflineNormal0223.json", {onProgress: UnityProgress});
+    </script>
   </head>
-
   <body>
-
-    
-      <p style="color:#ffffff">
-        手機轉向請按更新按鈕.
-      </p>
-
-	  </script>
-	  <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-	  <div style='position: absolute; bottom: 10px; right: 30px; width:100%; text-align: center; z-index: 1;'>
-	      <button playbutton id="mutebutton" style='position: absolute; bottom: 10px'>
-        	  播放
-	      </button>
-  	</div>
-		 
-	  
-    <a-scene mindar-image="imageTargetSrc: ./targets4.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-        <a-assets>
-            <video 
-		   preload="auto"
-		   id="vid" 
-		   autoplay
-		   response-type="arraybuffer" 
-		   loop
-                   crossorigin 
-		   webkit-playsinline 
-		   muted
-		   playsinline
-		   src = "https://johnnychiutw.github.io/test94/4.mp4"
-		   ></video>
-        </a-assets>
-      
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-	   
-	<a-entity id="example-target" mindar-image-target="targetIndex: 0" playbutton>
-      		<a-video src="#vid" position="0 0 0" height="0.66" width="1" rotation="0 0 0"></a-video>
-	</a-entity>
-	    
-    </a-scene>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 1366px; height: 768px"></div>
+      <div class="footer">
+        <div class="webgl-logo"></div>
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+        <div class="title">HoimeGameNew</div>
+      </div>
+    </div>
   </body>
 </html>
